@@ -1,4 +1,4 @@
-# OpenMath
+# OpenMaths
 
 
 
