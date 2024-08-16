@@ -1,6 +1,8 @@
 [package]
 name = "openmaths"
 version = "0.0.1"
+description = "Maths Library for Graphic Engines and Applications"
+license = "MIT"
 edition = "2021"
 
 [dependencies]
