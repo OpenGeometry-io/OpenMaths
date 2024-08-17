@@ -22,6 +22,16 @@ const PACKAGE_VERSION: &str = "0.0.1";
 
 struct Matrix( (i32, i32), (i32, i32) );
 
+struct Point {
+    x: f64,
+    y: f64
+}
+
+struct Line {
+    start: Point,
+    end: Point
+}
+
 impl fmt::Display for Matrix {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let Matrix( (a, b), (c, d) ) = *self;
@@ -49,6 +59,10 @@ fn main() {
     println!("Number Array: {}", num_arr[2]);
 
     analyze_slice(&num_arr);
+    print!("---------------------------------\n");
+    struct_example();
+    print!("---------------------------------\n");
+    enum_example();
 
     println!("Planned Revenue Target ${} in Q4 2025", 10_000_000u32);
 }
@@ -63,6 +77,76 @@ fn analyze_slice(slice: &[i32]) {
     println!("The slice has {} elements", slice.len());
 }
 
-// fn add( a: i32, b: i32 ) -> i32 {
-//     return a + b;
-// }
+
+// Struct Example
+// Date - 17th August 2024
+struct Date {
+    year: i32,
+    month: i32,
+    day: i32,
+    day_of_week: String
+}
+
+impl fmt::Display for Date {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}/{}/{} ({})", self.month, self.day, self.year, self.day_of_week)
+    }
+}
+
+fn struct_example() {
+    let day = 17;
+    let day_of_week = "Saturday";
+    let month = 08;
+    let year = 2024;
+
+    let date = Date {
+        month,
+        day,
+        day_of_week: String::from(day_of_week),
+        year,
+    };
+
+    // If you directly print the struct, it will give an error
+    // The error is because the struct does not implement the Display trait
+    println!("Date: {}", date);
+
+    // Desctructuring the struct
+    let Date { day_of_week, year, month, day } = date;
+    println!("Day is {}", day_of_week);
+}
+
+
+// Enum Example
+// Date - 17th August 2024
+
+enum Shape {
+    // Enum with no data
+    ShapeLoaded,
+    
+    // Enum with data
+    ShapeName(String),
+
+    // Struct-like enum
+    Center { x: f64, y: f64 }
+}
+
+fn inspect_shape(shape: Shape) {
+    match shape {
+        Shape::ShapeLoaded => println!("Shape Generated"),
+        Shape::ShapeName(name) => println!("Shape Name: {}", name),
+        Shape::Center { x, y } => println!("Center at ({}, {})", x, y) 
+    }
+}
+
+fn enum_example() {
+    let is_shape_loaded = Shape::ShapeLoaded;
+    let shape = Shape::ShapeName(String::from("Circle"));
+    let center = Shape::Center { x: 0.1, y: 0.2 };
+
+    inspect_shape(is_shape_loaded);
+    inspect_shape(shape);
+    inspect_shape(center);
+}
+
+
+

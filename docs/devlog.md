@@ -1,5 +1,16 @@
 # 🎥 Devlog
 
+### 17th August 2024
+
+#### Strutctures
+- Three types - Tuples, C type structs and Unit struct which are fieldless
+- Structs can be destructured as well `let Date { year, month, day, day_of_week } = date;`
+- Tuples and Struct appear to be same but the way they are accessed are different, structs cannot be indexed. There can be confusions when using tuple, I **might** avoid it as of now
+
+#### Enums
+- Allows the creation of type which can have one or more variant inside it
+- It is recommended to keep enums in uppercase
+
 ### 16th August 2024
 
 #### Publishing to Rust Crates
@@ -30,7 +41,7 @@
 - If a tuple contains a single value it should be separated by a comma, else rust considers it as a integer. `(5u32,)` - way to write *single element tuple*
 
 #### Return of the function
-- I found one thing strange coming from JS, rust doesn't force you to mention *return* keyword
+- I found one thing strange, rust doesn't force you to mention *return* keyword unlike JS
 - Don't let being perfectly idiomatic stop you from writing what you believe to be good code, I will use **return**
 
 #### Array and Slices
@@ -39,6 +50,10 @@
 - Length of an array can be fethced using `array.len()`
 - Memory size can be computed using `mem::size_of_val(&xs))`
 - Slices seem to be complex, need to look more deep into it!
+
+#### Custom
+- Custom types are created using `struct` and `enum`
+- Constants can be created using `const` and `static` keyword
 
 ### 15th August 2024
 
