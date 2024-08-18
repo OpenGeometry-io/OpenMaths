@@ -63,6 +63,10 @@ fn main() {
     struct_example();
     print!("---------------------------------\n");
     enum_example();
+    print!("---------------------------------\n");
+    mutability_example();
+    print!("---------------------------------\n");
+    casting_example();
 
     println!("Planned Revenue Target ${} in Q4 2025", 10_000_000u32);
 }
@@ -138,6 +142,12 @@ fn inspect_shape(shape: Shape) {
     }
 }
 
+enum Color {
+    Red = 0xff0000,
+    Green = 0x00ff00,
+    Blue = 0x0000ff,
+}
+
 fn enum_example() {
     let is_shape_loaded = Shape::ShapeLoaded;
     let shape = Shape::ShapeName(String::from("Circle"));
@@ -146,7 +156,36 @@ fn enum_example() {
     inspect_shape(is_shape_loaded);
     inspect_shape(shape);
     inspect_shape(center);
+
+    println!("Red: #{:06x}", Color::Red as i32);
 }
 
+// Mutability Example
+// Date - 18th August 2024
 
+fn mutability_example() {
+    let mut price = 100;
+
+    {
+        let price = 200;
+        // compile error because price is immutable in this scope
+        // price = price;
+
+        println!("Price in inner scope: {}", price);
+    }
+
+    price = 300;
+    println!("Price in outer scope: {}", price);
+}
+
+// Casting Example
+// Date - 18th August 2024
+
+fn casting_example() {
+    let pi:f64 = 3.14159265359_f64;
+    println!("Pi in decimal: {}", pi);
+
+    let pi_int = pi as i32;
+    println!("Pi in integer: {}", pi_int);
+}
 

@@ -1,5 +1,27 @@
 # 🎥 Devlog
 
+### 18th August 2024
+
+#### More on Custom Types
+- `const` and `static` can be used in Rust the same way done in another langauges like TS
+
+#### Variable Bindings
+- Rust provides *type safety* via statis typing, in most cases compiler infer type based on context
+- By default, the variables are non-mutable in Rust, to create a mutable(ability to change) variable you need to use `mut` keyword.
+```rust
+let age = 20
+age = 21 // ❌ error
+
+let mut age = 20
+age = 21 // ✅ works
+```
+- Shadow binding is allowed when a variable is declared in different scopes
+- Redeclaration is allowed as well, this shadows the previous bindings
+
+#### Casting
+- Explicit Casting is possible using `as` keyword. *let pi_int = pi_decimal as i32*
+
+
 ### 17th August 2024
 
 #### Strutctures
@@ -10,6 +32,7 @@
 #### Enums
 - Allows the creation of type which can have one or more variant inside it
 - It is recommended to keep enums in uppercase
+- Didn't understood this well, need to come back later to this [example](https://doc.rust-lang.org/rust-by-example/custom_types/enum/testcase_linked_list.html)
 
 ### 16th August 2024
 
