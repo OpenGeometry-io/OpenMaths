@@ -67,6 +67,12 @@ fn main() {
     mutability_example();
     print!("---------------------------------\n");
     casting_example();
+    print!("---------------------------------\n");
+    conversion_example();
+    print!("---------------------------------\n");
+    from_example();
+    print!("---------------------------------\n");
+    into_example();
 
     println!("Planned Revenue Target ${} in Q4 2025", 10_000_000u32);
 }
@@ -189,3 +195,45 @@ fn casting_example() {
     println!("Pi in integer: {}", pi_int);
 }
 
+// Conversion Example
+// Date - 19th August 2024
+
+fn conversion_example() {
+    let str = "Hello";
+    let string = String::from(str);
+    print!("String: {}", string);
+}
+
+// From
+use std::convert::From;
+struct Number {
+    value: i32,
+}
+
+impl From<i32> for Number {
+    fn from(item: i32) -> Self {
+        Number { value: item }
+    }
+}
+
+fn from_example() {
+    let point = Number::from(23);
+    println!("Point: {}", point.value);
+}
+
+// Into
+struct Det{
+    value: i32,
+}
+
+impl Into<Det> for i32 {
+    fn into(self) -> Det {
+        Det { value: self }
+    }
+}
+
+fn into_example() {
+    let int = 5;
+    let det: Det = int.into();
+    println!("Det: {:?}", det.value);
+}

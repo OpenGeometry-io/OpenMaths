@@ -1,5 +1,25 @@
 # 🎥 Devlog
 
+### 19th August 2024
+
+#### Casting Continued..
+- Casting works in some cases and not always, e.g. it is not possible to cast float to char
+- Cast needs to be used wisely
+
+#### Literals
+- Numerical literals can be type annoted, the type needs to be added after the value
+- e.g. *let i = 3iu8*
+
+#### Inference & Aliasing
+- Type inference can check for the array elements and infer the type based upon it's use
+- Types can be renamed using aliasing method, for e.g. *type KG = u32*
+- When using type aliasing, the types should *UpperCamelCase* names to prevent compiler warnings
+
+#### Conversion
+- **From** trait allows the way to create itself from another type
+- **Into** is similar to From but it doesn't take value, rather called upon the variable
+- **From** and **Into** are interchangeable
+
 ### 18th August 2024
 
 #### More on Custom Types
@@ -20,7 +40,6 @@ age = 21 // ✅ works
 
 #### Casting
 - Explicit Casting is possible using `as` keyword. *let pi_int = pi_decimal as i32*
-
 
 ### 17th August 2024
 
