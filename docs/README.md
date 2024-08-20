@@ -1,6 +1,0 @@
----
-description: Thinking...🤔
----
-
-# OpenMath
-

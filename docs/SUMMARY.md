@@ -1,4 +1,4 @@
 # Table of contents
 
-* [OpenMaths](README.md)
+* [OpenMaths](../)
 * [🎥 Devlog](devlog.md)
