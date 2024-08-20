@@ -73,6 +73,12 @@ fn main() {
     from_example();
     print!("---------------------------------\n");
     into_example();
+    print!("---------------------------------\n");
+    try_from_example();
+    print!("---------------------------------\n");
+    rectangle_example();
+    print!("---------------------------------\n");
+    flow_control_example();
 
     println!("Planned Revenue Target ${} in Q4 2025", 10_000_000u32);
 }
@@ -237,3 +243,71 @@ fn into_example() {
     let det: Det = int.into();
     println!("Det: {:?}", det.value);
 }
+
+// TryFrom and TryInto
+use std::convert::{TryFrom, TryInto};
+
+#[derive(Debug, PartialEq)]
+struct OddNumber(i32);
+
+impl TryFrom<i32> for OddNumber {
+    type Error = ();
+    
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        if value % 2 != 0 {
+            Ok(OddNumber(value))
+        } else {
+            Err(())
+        }
+    }
+}
+
+fn try_from_example() {
+    assert_eq!(OddNumber::try_from(3), Ok(OddNumber(3)));
+    assert_eq!(OddNumber::try_from(2), Err(()), "2 is not an odd number");
+}
+
+// To and From Strings
+// Date - 20th August 2024
+struct Rectangle {
+    width: u32,
+    height: u32,
+    area: u32
+}
+
+impl fmt::Display for Rectangle {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Rectangle ({} x {}) with Area: {}", self.width, self.height, self.area)
+    }
+}
+
+fn rectangle_example() {
+    let width = 30;
+    let height = 50;
+
+    let area = width * height;
+
+    let rectangle = Rectangle { width, height, area };
+
+    println!("{}", rectangle.to_string());
+
+    // parsing string to integer
+    let rectangle_perimeter = "100".parse::<i32>().unwrap();
+    println!("Rectangle Perimeter: {}", rectangle_perimeter);
+}
+
+// Flow Control
+fn flow_control_example () {
+    let num = 32;
+    let num_type = 
+    if num%2 == 0 {
+        println!("num is even");
+        num * 10
+    } else {
+        println!("num is odd");
+        num * 11
+    };
+
+    println!("{}", num_type);
+}
+

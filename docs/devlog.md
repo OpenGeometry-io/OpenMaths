@@ -1,5 +1,45 @@
 # 🎥 Devlog
 
+### 20th August 2024
+
+#### TryFrom and TryInto
+- Useful when doing type conversion that have some chances of failing and need special handling
+- *From* and *Into* are for perfect conversions
+- **TryFrom** and **TryInto** checks if the conversion can go bad, it is always better to use **TryFrom** and **TryInto** rather than relying on From (more safe)
+
+#### String Operations
+- String can be parsed using `"5".parse().unwrap()`
+- type can be converted to string using e.g. `rectangle.to_string()`
+
+#### Expressions
+- Blocks are expressions too, the last statement is a return value of that block
+```rust
+let y = {
+  let x = 1;
+  let j = 2;
+  x + j
+}
+
+println!("{}", y); // 3
+```
+
+#### Flow
+- if-else is similar. The condition doesn't need to be surronded by **()**
+- All blocks return a value and the last expression does the same here
+````rust
+let num = 32;
+let num_type = 
+  if num/2 == 0 {
+    println!("num is even");
+    num * 10
+  } else {
+    println!("num is odd");
+    num * 11
+  };
+
+println!("{}", num_type); // 3200
+````
+
 ### 19th August 2024
 
 #### Casting Continued..
