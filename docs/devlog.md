@@ -1,5 +1,40 @@
 # Devlog
 
+### 21st August 2024
+
+#### Loop
+
+- Loop is created using *loop* keyword, `break` keyword will break the loop and `continue` skips the rest of the implementation and starts over
+- Loops can be nested and should be anotated with `'` with a name to it, e.g. `'outer: loop {}`
+- To break or continue the nested loop it can be done like this, `break 'outer`
+- Loop can return value, if the value is attached after the break keyword. e.g. `break result`
+
+#### While
+
+- A while loop can be used until the condition is satisfied
+```rust
+while value < 10 {
+  println!("number is {}", value)
+  value += 1
+}
+```
+
+#### For Loops
+
+- `for in` can be used to iterate through *Iterator*, it is not anywhere close to TS
+- The iterator initial value and final value should contain `..` notation.
+```rust
+for n in 1..10 {
+  println!("number is {}", n)
+}
+```
+- In the above case loop will run until `n` is 9. To include 10 as well, loop should be like this `for n in 1..=10`
+
+#### Match like Switch
+
+- Works just like any other switch statement
+- Match can be used as an expression as well and used later on. e.g. `let switchStatement = match incomeTax { .... } `
+
 ### 20th August 2024
 
 #### TryFrom and TryInto
