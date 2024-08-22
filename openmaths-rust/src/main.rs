@@ -79,6 +79,10 @@ fn main() {
     rectangle_example();
     print!("---------------------------------\n");
     flow_control_example();
+    print!("---------------------------------\n");
+    match_tuple_example();
+    print!("---------------------------------\n");
+    associated_functions();
 
     println!("Planned Revenue Target ${} in Q4 2025", 10_000_000u32);
 }
@@ -339,5 +343,62 @@ fn flow_control_example () {
     };
 
     println!("{} -> {}", boolean, binary);
+}
+
+
+// Match Example with Tuple
+// Date - 22nd August 2024
+
+fn match_tuple_example() {
+    let vector = (0, 4, 1);
+
+    match vector {
+        // (0, y, z) => println!("First element is 0, y is {} and z is {}", y, z),
+        (x, 0, z) => println!("x is {}, Second element is 0 and z is {}", x, z),
+        (x, y, 0) => println!("x is {}, y is {} and Third element is 0", x, y),
+        (.., 1) => println!("Last element is 1"),
+        _ => println!("None of the elements are 0"),
+    }
+
+    match_array_example();
+}
+
+fn match_array_example() {
+    let vector = [0, 4, 1];
+
+    match vector {
+        [0, y, z] => println!("First element is 0, y is {} and z is {}", y, z),
+        [x, 0, ..] => println!("x is {}, Second element is 0", x),
+        [x, rest @ ..] => println!("x is {}, rest of the elements are {:?}", x, rest),
+    }
+}
+
+// Associated Functions
+struct Point3D {
+    x: f64,
+    y: f64,
+    z: f64
+  }
+  
+impl Point3D {
+    // called as a contructor
+    fn set(x: f64, y: f64, z: f64) -> Point3D{
+        Point3D { x: x, y: y, z: z}
+    }
+
+    // called as a method
+    fn add (&self, other: &Point3D) -> Point3D {
+        Point3D { x: self.x + other.x, y: self.y + other.y, z: self.z + other.z }
+    }
+}
+
+fn associated_functions() {
+    let point1 = Point3D::set(1.0, 2.0, 3.0);
+    let point2 = Point3D::set(4.0, 5.0, 6.0);
+
+    let point3 = point1.add(&point2);
+
+    println!("Point 3: x: {}, y: {}, z: {}", point3.x, point3.y, point3.z);
+    // Eureka! This can be really useful
 }
 

@@ -1,5 +1,56 @@
 # Devlog
 
+### 22nd August 2024
+
+#### More on Match 
+
+- Match works with tuples as well, either all the elements can be tested for a match or even some elements in a partocular order can be tested as well.
+```rust
+match vector {
+  (0, ..) => println!("First Element is 0"),
+  (.., 0) => println!("Last Element is 0"),
+  (0, 0, 0) => ("Zero Vector"),
+  _ => println!("Default Case, don't bind to anything"),
+}
+```
+
+- Match also works with array and can be tested for a value or can be indexed as well. The value needs to be mentioned explicitly and the index can be defined like variables and the values are binded to it
+```rust
+match vector {
+  [0, y, z] => println!("First element is 0, y is {} and z is {}", y, z),
+  [x, 0, ..] => println!("x is {}, Second element is 0", x),
+  [x, rest @ ..] => println!("x is {}, rest of the elements are {:?}", x, rest),
+}
+```
+- *@* creates a slice of remaining elements and stores it inside `rest`
+
+- *enums* can be tested using match as well
+- more on **binding** later
+
+#### Functions
+
+- Declared using *fn* keyword, return type specified by **->**
+- There is a unique type of functions as well, called *associated* functions. They can be associated to a particular type. I like them!
+```rust
+struct Point3D {
+  x: f64,
+  y: f64,
+  z: f64
+}
+  
+impl Point3D {
+  // called as a contructor
+  fn set(x: f64, y: f64, z: f64) -> Point3D{
+    Point3D { x: x, y: y, z: z}
+  }
+
+  // called as a method
+  fn add (&self, other: &Point3D) -> Point3D {
+    Point3D { x: self.x + other.x, y: self.y + other.y, z: self.z + other.z }
+  }
+}
+```
+
 ### 21st August 2024
 
 #### Loop
