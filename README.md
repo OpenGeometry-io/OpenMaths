@@ -1,4 +1,4 @@
-[OpenMaths](./assets/openmathsTextLogo.png)
+![OpenMaths](./assets/openmathsTextLogo.png)
 
 ### [OpenMaths](https://openmaths.opengeometry.io/)
 
