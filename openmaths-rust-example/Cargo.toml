@@ -1,0 +1,7 @@
+[package]
+name = "openmaths-rust-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openmaths = { path = "../openmaths-cargo" }
