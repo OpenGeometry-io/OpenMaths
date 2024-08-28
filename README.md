@@ -1,6 +1,4 @@
----
-description: Thinking...🤔
----
+[OpenMaths](./assets/openmathsTextLogo.png)
 
-# OpenMath
+### [OpenMaths](https://openmaths.opengeometry.io/)
 
