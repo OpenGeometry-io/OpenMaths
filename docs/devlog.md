@@ -1,5 +1,14 @@
 # Devlog
 
+### 29th August 2024
+
+#### Long Time No See
+
+- Last on week was more execution and less learning
+- Applying things learned and using it, helps you build better knowledge
+- What did I execute? Created WebPage for `OpenGeometry`, created WASM package along with example to validate `OpenMaths`
+- More on MVP coming soon
+
 ### 22nd August 2024
 
 #### More on Match 
