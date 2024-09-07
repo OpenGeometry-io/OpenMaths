@@ -463,6 +463,27 @@ pub mod openmaths {
     triangles
   }
 
+  pub fn triangle_test(
+    vertices: Vec<Vector3D>,
+    a_index: u32,
+    b_index: u32,
+    c_index: u32,
+  ) -> bool {
+    let mut triangle = Triangle::new();
+    triangle.set_vertices(vertices[a_index as usize], vertices[b_index as usize], vertices[c_index as usize]);
+
+    for i in 0..vertices.len() {
+      if i != a_index as usize && i != b_index as usize && i != c_index as usize {
+        let p = vertices[i].clone();
+        if triangle.is_point_in_triangle(p) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
   #[wasm_bindgen]
   // pub fn triangulate_by_index(vertices: Vec<Vector3D>) -> Vec<u64> {
   pub fn triangulate_by_index() -> String {
@@ -485,6 +506,7 @@ pub mod openmaths {
     // Getting the indices of test_vertices
     let mut vertex_indices: Vec<u32> = (0..test_vertices.len() as u32).collect();
     let mut vertex_indices_copy = vertex_indices.clone();
+    let mut treated_indices: Vec<u32> = Vec::new();
 
     let mut ear_tip_index = 0;
     let mut triangle_indices_count = 0;
@@ -502,86 +524,34 @@ pub mod openmaths {
       if cross_product.y > 0.0 {
         
         // check if any other vertex is inside the triangle
-        let mut is_ear = true;
-        for i in vertex_indices_copy.clone() {
-          if i != b as u32 && i != eartip && i != c as u32 {
-            let p = test_vertices[i as usize].clone();
-            let mut triangle = Triangle::new();
-            triangle.set_vertices(test_vertices[b as usize], test_vertices[eartip as usize], test_vertices[c as usize]);
-            if triangle.is_point_in_triangle(p) {
-              is_ear = false;
-              break;
-            }
+        let is_ear = triangle_test(test_vertices.clone(), b as u32, eartip as u32, c as u32);
+        
+        if is_ear {
+          ear_tip_index += 1;
+          if ear_tip_index == vertex_indices.len() {
+            break 'check_number_triangles;
           }
+          continue 'check_number_triangles;
         }
         
         // if ear, add to triangle_indices
         let ear: Vec<u32> = vec![b as u32, eartip as u32, c as u32];
         triangle_indices.push(ear);
+        treated_indices.push(eartip);
         triangle_indices_count += 1;
       }
 
       // if not ear, break
       ear_tip_index += 1;
+
+      if ear_tip_index == vertex_indices.len() && triangle_indices_count < test_vertices.len() - 2 {
+        ear_tip_index = 0;
+      }
+
       if ear_tip_index == vertex_indices.len() {
         break 'check_number_triangles;
       }
     }
-    
-    // // calculate cross products - OK
-    // // first run without removing any vertices
-
-    // while treated_vertices.len() < test_vertices.len() - 2
-    // {
-    //   let mut untreated_vertices = vertex_indices.clone();
-    //   let mut untreaded_v_length:u32 = untreated_vertices.len().try_into().unwrap();
-
-    //   'outer: for i in 0..untreaded_v_length {
-    //     let ear_tip_index = i;
-    //     let b_tip_index = if i == 0 { untreaded_v_length - 1 } else { i - 1 };
-    //     let c_tip_index = if i == untreaded_v_length - 1 { 0 } else { i + 1 };
-
-    //     let ear_vertex = test_vertices[ear_tip_index as usize];
-    //     let b_vertex = test_vertices[b_tip_index as usize];
-    //     let c_vertex = test_vertices[c_tip_index as usize];
-
-    //     let ab = b_vertex.clone().subtract(&ear_vertex);
-        
-    //     let ac = c_vertex.clone().subtract(&ear_vertex);
-
-    //     let cross_product = ab.clone().cross(&ac);
-    //     // cross_producs.push(cross_product);
-    //     // let c_test = vec![ab, ac, cross_product];
-    //     // cross_test.push(c_test);
-
-    //     if cross_product.y > 0.0 {
-    //       let mut triangle = Triangle::new();
-    //       triangle.set_vertices(ear_vertex, b_vertex, c_vertex);
-
-    //       for i in vertex_indices.clone() {
-    //         if (i != ear_tip_index && i != b_tip_index && i != c_tip_index) || !treated_vertices.contains(&i) {
-    //           treated_vertices.push(i);
-
-    //           let found_triangle = vec![ear_tip_index, b_tip_index, c_tip_index];
-    //           triangle_indices.push(found_triangle);
-              
-    //           // since number of triangles is equal to number of vertices - 2
-    //           if treated_vertices.len() == untreaded_v_length as usize - 2 {
-    //             break 'outer;
-    //           }
-    //         }
-    //       }
-        
-    //       // let found_triangle = vec![ear_tip_index, b_tip_index, c_tip_index];
-    //       // triangle_indices.push(found_triangle);
-    //     }
-    //   }
-    // }
-
-    // serde_json::to_string(&cross_test).unwrap()
-    // serde_json::to_string(&vertex_indices).unwrap()
-    // serde_json::to_string(&treated_vertices).unwrap()
-
     serde_json::to_string(&triangle_indices).unwrap()
   }
 }
