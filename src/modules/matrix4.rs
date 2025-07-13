@@ -5,8 +5,8 @@ pub struct Matrix4 {
 
 impl Matrix4 {
   /**
-   * Create a new Matrix4 with identity elements.
-   */
+  * Create a new Matrix4 with identity elements.
+  */
   pub fn new() -> Matrix4 {
     Matrix4 {
       elements: [
@@ -23,8 +23,8 @@ impl Matrix4 {
   }
 
   /**
-   * Sets the matrix element to create an identity matrix.
-   */
+  * Sets the matrix element to create an identity matrix.
+  */
   pub fn identity(&mut self) {
     self.elements = [
       [1.0, 0.0, 0.0, 0.0],
@@ -34,6 +34,10 @@ impl Matrix4 {
     ];
   }
 
+  /**
+  * Multiply this matrix with another Matrix4
+  * Returns a new Matrix4 instance
+  */
   pub fn multiply(&self, other: &Matrix4) -> Matrix4 {
     let mut result = [[0.0; 4]; 4];
     for i in 0..4 {
@@ -47,6 +51,10 @@ impl Matrix4 {
     Matrix4 { elements: result }
   }
 
+  /**
+  * Add another Matrix4 to this one.
+  * Returns a new Matrix4 instance with the result.
+  */
   pub fn add(&self, incoming: &Matrix4) -> Matrix4 {
     let mut result = [[0.0; 4]; 4];
     for i in 0..4 {
@@ -58,6 +66,9 @@ impl Matrix4 {
     Matrix4 { elements: result }
   }
 
+  /**
+  * Flatten the matrix into a vector of f64.
+  */
   pub fn flatten(&self) -> Vec<f64> {
     self.elements.iter().flat_map(|row| row.iter()).cloned().collect()
   }

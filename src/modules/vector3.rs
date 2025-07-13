@@ -142,11 +142,36 @@ impl Vector3 {
     self.magnitude()
   }
 
+  /**
+  * Normalize the vector
+  */
   pub fn normalize(&mut self) {
     let mag = self.magnitude();
     if mag > 0.0 {
       self.divide_scalar(mag);
     }
+  }
+
+  /**
+  * Calculate the cross product and return the result as a new Vector3
+  */
+  pub fn cross(&self, other: &Vector3) -> Vector3 {
+    Vector3 {
+      x: self.y * other.z - self.z * other.y,
+      y: self.z * other.x - self.x * other.z,
+      z: self.x * other.y - self.y * other.x,
+    }
+  }
+
+  /**
+  * Calculate the distance between this vector and another Vector3 instance.
+  * Return the distance as a f64 value in Euclidean space.
+  */
+  pub fn distance(&self, other: &Vector3) -> f64 {
+    let dx = self.x - other.x;
+    let dy = self.y - other.y;
+    let dz = self.z - other.z;
+    (dx * dx + dy * dy + dz * dz).sqrt()
   }
 
 }
