@@ -19,37 +19,45 @@ impl Vector3 {
   /**
   * Add the elements of another vector to this one.
   */
-  pub fn add(&mut self, other: &Vector3) {
+  pub fn add(&mut self, other: &Vector3) -> Vector3 {
     self.x = self.x + other.x;
     self.y = self.y + other.y;
     self.z = self.z + other.z;
+
+    *self
   }
 
   /**
   * Add a scalar value to each element of the vector.
   */
-  pub fn add_scalar(&mut self, scalar: f64) {
+  pub fn add_scalar(&mut self, scalar: f64) -> Vector3 {
     self.x += scalar;
     self.y += scalar;
     self.z += scalar;
+
+    *self
   }
 
   /**
   * Subtract the elements of another vector from this one.
   */
-  pub fn subtract(&mut self, other: &Vector3) {
+  pub fn subtract(&mut self, other: &Vector3) -> Vector3 {
     self.x = self.x - other.x;
     self.y = self.y - other.y;
     self.z = self.z - other.z;
+    
+    *self
   }
 
   /**
   * Subtract a scalar value from each element of the vector.
   */
-  pub fn subtract_scalar(&mut self, scalar: f64) {
+  pub fn subtract_scalar(&mut self, scalar: f64) -> Vector3 {
     self.x -= scalar;
     self.y -= scalar;
     self.z -= scalar;
+
+    *self
   }
 
   /**
@@ -84,46 +92,56 @@ impl Vector3 {
   /**
   * Multiply the vector by a scalar value.
   */
-  pub fn multiply_scalar(&mut self, scalar: f64) {
+  pub fn multiply_scalar(&mut self, scalar: f64) -> Vector3 {
     self.x *= scalar;
     self.y *= scalar;
     self.z *= scalar;
+
+    *self
   }
 
   /**
   * Multiply the vector by another Vector3 instance element-wise.
   */
-  pub fn multiply(&mut self, other: &Vector3) {
+  pub fn multiply(&mut self, other: &Vector3) -> Vector3 {
     self.x *= other.x;
     self.y *= other.y;
     self.z *= other.z;
+
+    *self
   }
 
   /**
   * Divide the vector by another Vector3 instance element-wise. 
   */
-  pub fn divide(&mut self, other: &Vector3) {
+  pub fn divide(&mut self, other: &Vector3) -> Vector3 {
     self.x /= other.x;
     self.y /= other.y;
     self.z /= other.z;
+
+    *self
   }
 
   /**
   * Divide the vector by a scalar value.
   */
-  pub fn divide_scalar(&mut self, scalar: f64) {
+  pub fn divide_scalar(&mut self, scalar: f64) -> Vector3 {
     self.x /= scalar;
     self.y /= scalar;
     self.z /= scalar;
+
+    *self
   }
 
   /**
   * Invert the vector by negating the vector elements.
   */
-  pub fn negate(&mut self) {
+  pub fn negate(&mut self) -> Vector3 {
     self.x = -self.x;
     self.y = -self.y;
     self.z = -self.z;
+
+    *self
   }
 
   /**
@@ -151,11 +169,13 @@ impl Vector3 {
   /**
   * Normalize the vector
   */
-  pub fn normalize(&mut self) {
+  pub fn normalize(&mut self) -> Vector3 {
     let mag = self.magnitude();
     if mag > 0.0 {
       self.divide_scalar(mag);
     }
+
+    *self
   }
 
   /**
