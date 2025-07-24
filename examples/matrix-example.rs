@@ -57,4 +57,8 @@ fn main() {
     // // Check if the inverse multiplication gives identity matrix
     // let identity_check = m6_inverse_multiplied.is_identity();
     // println!("11. Is the result an identity matrix? - {}", identity_check);
+
+    // Transpose of a matrix
+    let m8 = m2.clone().transpose();
+    println!("12. Transpose of m2: {:?}", m8.elements());
 }

@@ -243,4 +243,18 @@ impl Matrix4 {
       0.0, 0.0, 0.0, 1.0,
     ]
   }
+
+  /**
+  * Create a Transpose of the matrix.
+  * Returns a new Matrix4 instance.
+  */
+  pub fn transpose(&self) -> Matrix4 {
+    let mut transposed = vec![0.0; 16];
+    for i in 0..4 {
+      for j in 0..4 {
+        transposed[j * 4 + i] = self.elements[i * 4 + j];
+      }
+    }
+    Matrix4 { elements: transposed }
+  }
 }

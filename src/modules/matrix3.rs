@@ -113,5 +113,19 @@ impl Matrix3 {
     }
     Some(inv)
   }
+
+  pub fn transpose(&self) -> Matrix3 {
+    let mut transposed = Matrix3::new();
+    transposed.elements[0] = self.elements[0];
+    transposed.elements[1] = self.elements[3];
+    transposed.elements[2] = self.elements[6];
+    transposed.elements[3] = self.elements[1];
+    transposed.elements[4] = self.elements[4];
+    transposed.elements[5] = self.elements[7];
+    transposed.elements[6] = self.elements[2];
+    transposed.elements[7] = self.elements[5];
+    transposed.elements[8] = self.elements[8];
+    transposed
+  }
 }
   
