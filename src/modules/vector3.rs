@@ -1,6 +1,8 @@
 use wasm_bindgen::prelude::*;
 use serde::{Serialize, Deserialize};
 
+use crate::Matrix4;
+
 #[wasm_bindgen]
 #[derive(Copy, Clone, Serialize, Deserialize)]
 pub struct Vector3 {
@@ -200,4 +202,29 @@ impl Vector3 {
     (dx * dx + dy * dy + dz * dz).sqrt()
   }
 
+    /**
+  * Apply a transformation matrix to the vector.
+  * This method assumes the transformation matrix is a 4x4 matrix.
+  */
+  pub fn apply_matrix4(&mut self, matrix: Matrix4) {
+    let elements = matrix.flatten();
+    let x = self.x;
+    let y = self.y;
+    let z = self.z;
+
+    let new_x = elements[0] * x + elements[4] * y + elements[8] * z + elements[12];
+    let new_y = elements[1] * x + elements[5] * y + elements[9] * z + elements[13];
+    let new_z = elements[2] * x + elements[6] * y + elements[10] * z + elements[14];
+    let w = elements[3] * x + elements[7] * y + elements[11] * z + elements[15];
+
+    if w != 1.0 && w != 0.0 {
+      self.x = new_x / w;
+      self.y = new_y / w;
+      self.z = new_z / w;
+    } else {
+      self.x = new_x;
+      self.y = new_y;
+      self.z = new_z;
+    }
+  }
 }

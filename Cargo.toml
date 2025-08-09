@@ -1,6 +1,6 @@
 [package]
 name = "openmaths"
-version = "0.2.3"
+version = "0.2.4"
 authors = ["Vishwajeet Mane <manevishwajeet1@gmail.com>"]
 description = "Powerful Maths Library for Graphical Applications in Rust and OpenGeometry"
 license = "MIT/Apache-2.0"

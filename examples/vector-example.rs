@@ -93,4 +93,15 @@ fn main() {
   let v25 = Vector3::new(4.0, 5.0, 6.0);
   let distance = v24.distance(&v25);
   println!("17. Distance between v24 and v25: {}", distance);
+
+  // Apply a transformation matrix with translation at 2 in x axis, to a vector
+  let mut v26 = Vector3::new(1.0, 2.0, 3.0);
+  let matrix = openmaths::Matrix4::set(
+    1.0, 0.0, 0.0, 2.0,
+    0.0, 1.0, 0.0, 5.0,
+    0.0, 0.0, 1.0, 0.0,
+    0.0, 0.0, 0.0, 1.0
+  );
+  v26.apply_matrix4(matrix);
+  println!("18. v26 after applying transformation matrix: ({}, {}, {})", v26.x, v26.y, v26.z);
 }
